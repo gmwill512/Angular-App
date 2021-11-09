@@ -1,0 +1,69 @@
+<label>Server Name</label>
+<!-- <input type="text" class="form-control"
+ (input) = "onUpdateServerName($event)"
+ placeHolder="Input Server Name"
+> -->
+<input
+  type="text"
+  class="form-control"
+  [(ngModel)]="serverName"
+  placeholder="Input Server Name"
+/>
+<br />
+<button
+  class="btn btn-primary"
+  [disabled]="!allowNewServer"
+  (click)="onCreateServer()"
+>
+  Add Server
+</button>
+<br />
+<!-- <p [innerText]="allowNewServer">{{allowNewServer}}</p>-->
+<br />
+<label>Username</label>
+<input
+  type="text"
+  class="form-control"
+  [(ngModel)]="usernameUpdate"
+  placeholder="Input Username"
+/>
+<br />
+<button class="btn btn-primary" (click)="onDisplayUsername()">
+  Update User
+</button>
+<button
+  class="btn btn-primary"
+  [disabled]="!usernameUpdate"
+  (click)="resetUsername()"
+>
+  Reset User
+</button>
+<br />
+<!-- <p>{{serverCreationStatus}}</p>
+<p>{{username}}</p> -->
+<br />
+<button class="btn btn-primary" (click)="changeButtonDetails()">
+  Display Details
+</button>
+<p>{{ buttonPresses }}</p>
+<p *ngIf="buttonDisplay">Secret Password: tuna</p>
+<div
+  *ngFor="let times of buttonLog; let i = index"
+  [ngStyle]="{
+    backgroundColor: i >= buttonLog.length / 2 ? 'blue' : 'transparent'
+  }"
+  [ngClass]="{ 'white-text': i > buttonLog.length / 2 }"
+>
+  {{ times }}
+</div>
+
+<p *ngIf="serverCreated; else noServer">
+  The server name is {{ serverCreationStatus }}
+</p>
+<ng-template #noServer>
+  <p>No server was created.</p>
+  <br />
+</ng-template>
+<p *ngIf="isUsernameUpdated">The username is {{ username }}</p>
+<br />
+<app-server *ngFor="let server of servers"></app-server>
